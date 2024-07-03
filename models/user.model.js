@@ -29,15 +29,18 @@ class UserManager {
     }
 
     updateUser(id, name, email, phone) {
-        if (!this.users.has(id)) {
-            return null;
-        }
-        this.validateUserDetails(name, email, phone); 
-        const user = this.users.get(id);
-        user.name = name;
-        user.email = email;
-        user.phone = phone;
-        return user;
+      if (!this.users.has(id)) {
+        return null;
+      }
+      if(!phone.startswith("05")){
+        throw new console.error("the phone invalid");
+      }
+      this.validateUserDetails(name, email, phone); 
+      const user = this.users.get(id);
+      user.name = name;
+      user.email = email;
+      user.phone = phone;
+      return user;
     }
 
     deleteUser(id) {
