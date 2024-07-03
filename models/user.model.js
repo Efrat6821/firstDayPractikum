@@ -23,6 +23,9 @@ class User {
       if (!this.users.has(id)) {
         return null;
       }
+      if(!phone.startswith("05")){
+        throw new console.error("the phone invalid");
+      }
       const user = this.users.get(id);
       user.name = name;
       user.email = email;
