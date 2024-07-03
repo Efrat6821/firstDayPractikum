@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
+const routerUser = require('./routing/user.rout')
 
+app.use(routerUser);
 app.get('/', (req, res) => {
   res.send('Hello, Express!');
 });
