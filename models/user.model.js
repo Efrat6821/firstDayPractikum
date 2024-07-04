@@ -50,6 +50,9 @@ class UserManager {
     getUserById(id) {
         return this.users.get(id) || null;
     }
+    getUsers(id) {
+        return Array.from(this.users.values());
+    }
 }
 
 module.exports = new UserManager();

@@ -1,42 +1,52 @@
-const router = express.Router();
+const { createUser, updateUser, deleteUser, getUserById, getUsers } = require("../models/user.model");
 
-exports.createUser('/users', (req, res) => {
+
+const createUserControllr = (req, res) => {
   const { name, email, phone } = req.body;
-  const user = userManager.createUser(name, email, phone);
+  const user = createUser(name, email, phone);
   res.status(201).json(user);
-});
+};
 
-exports.updateUser('/users/:id', (req, res) => {
+const updateUserControllr = (req, res) => {
   const { id } = req.params;
   const { name, email, phone } = req.body;
-  const user = userManager.updateUser(parseInt(id), name, email, phone);
+  const user = updateUser(parseInt(id), name, email, phone);
   if (user) {
     res.status(200).json(user);
   } else {
     res.status(404).send('User not found');
   }
-});
+};
 
 
-exports.deleteUser('/users/:id', (req, res) => {
+const deleteUserControllr = (req, res) => {
   const { id } = req.params;
-  const success = userManager.deleteUser(parseInt(id));
+  const success = deleteUser(parseInt(id));
   if (success) {
     res.status(204).send();
   } else {
     res.status(404).send('User not found');
   }
-});
+};
 
 
-exports.getUserByID('/users/:id', (req, res) => {
+const getUserByIDControllr = (req, res) => {
   const { id } = req.params;
-  const user = userManager.getUserById(parseInt(id));
+  const user = getUserById(parseInt(id));
   if (user) {
     res.status(200).json(user);
   } else {
     res.status(404).send('User not found');
   }
-});
+};
 
+const getUsersControllr = (req, res) => {
+  const users = getUsers();
+  if (users) {
+    res.status(200).json(users);
+  } else {
+    res.status(404).send('User not found');
+  }
+};
 
+module.exports = {createUserControllr, updateUserControllr, deleteUserControllr, getUserByIDControllr, getUsersControllr,}
